@@ -18,10 +18,15 @@ class ViewController: UIViewController {
     var score = 0
     var correctAnswer = 0
     var round = 0
+    var highScore = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let defaults = UserDefaults.standard
+        highScore = defaults.integer(forKey: "highscore")
+        
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: showRound)
         
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
@@ -36,13 +41,26 @@ class ViewController: UIViewController {
         askQuestion()
     }
     
+//    @objc func showRound() {
+//        let ac = uialert
+//    }
+    
     func askQuestion(alert: UIAlertAction! = nil) {
         round += 1
         
         if round > 10 {
             title = "Final Score: \(score) "
             
-            let ac = UIAlertController(title: "Game Over", message: "Your final score is \(score)", preferredStyle: .alert)
+            var message = ""
+            if score > highScore {
+                message = "Your new high score is \(score)"
+                let defaults = UserDefaults.standard
+                defaults.set(score, forKey: "highscore")
+            } else {
+                message = "Your final score is \(score)"
+            }
+            
+            let ac = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true, completion: nil)
             

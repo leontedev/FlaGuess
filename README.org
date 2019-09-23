@@ -1,0 +1,10 @@
+* FlaGuess
+
+Project 2 - www.HackingWithSwift.com/100
+
+*A mini-game to learn country flags.*
+
+[[day49.png]]
+
+** Day 49 Challenge
+Added high score - saved to UserDefaults
