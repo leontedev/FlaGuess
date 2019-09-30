@@ -103,7 +103,22 @@ class ViewController: UIViewController {
         
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
-        present(ac, animated: true, completion: nil)
+        
+        // Day 58 Challenge - make the flags scale down with a little bounce when pressed.
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: [], animations: {
+            let scaleDown = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            sender.transform = scaleDown
+        }) { [weak self] (_) in
+            sender.transform = .identity
+            self?.present(ac, animated: true, completion: nil)
+        }
+        
+//        UIView.animate(withDuration: 1, animations: {
+//            sender.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+//
+//        }) { (_) in
+//            present(ac, animated: true, completion: nil)
+//        }
         
     }
     
